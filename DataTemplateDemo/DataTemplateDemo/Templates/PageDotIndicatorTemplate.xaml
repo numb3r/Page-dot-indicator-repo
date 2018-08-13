@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DataTemplateDemo.Templates.PageDotIndicatorTemplate">
+      <BoxView HeightRequest="10"
+               WidthRequest="10"
+               BackgroundColor="CornflowerBlue">
+          <BoxView.Triggers>
+              <DataTrigger Binding="{Binding IsCurrent}"
+                           TargetType="BoxView"
+                           Value="True">
+                  <Setter Property="BackgroundColor" Value="White" />
+              </DataTrigger>
+          </BoxView.Triggers>
+      </BoxView>
+</ViewCell>

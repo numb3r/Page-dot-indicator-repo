@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:DataTemplateDemo.Controls;assembly=DataTemplateDemo"
+             xmlns:selectors="clr-namespace:DataTemplateDemo.Selectors;assembly=DataTemplateDemo"
+             xmlns:behaviors="clr-namespace:DataTemplateDemo.Behaviors;assembly=DataTemplateDemo"
+             xmlns:enum="clr-namespace:DataTemplateDemo.Commons;assembly=DataTemplateDemo"
+             x:Class="DataTemplateDemo.MainPage"
+             BackgroundColor="#39738b">
+
+    <controls:CustomContentView>
+        <controls:CustomContentView.Behaviors>
+            <behaviors:EventToCommandBehavior EventName="SwipeLeft" 
+                                              Command="{Binding SwipeLeftCmd}" 
+                                              CommandParameter="{x:Static enum:Swipe.Left}"/>
+            <behaviors:EventToCommandBehavior EventName="SwipeRight" 
+                                              Command="{Binding SwipeRightCmd}" 
+                                              CommandParameter="{x:Static enum:Swipe.Right}"/>
+        </controls:CustomContentView.Behaviors>
+        <Grid>
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <selectors:PageDotIndicatorSelector x:Key="PageDotIndicatorTemplate"/>
+                </ResourceDictionary>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--<controls:CustomStackLayout
+            x:Name="PageDotIndicatorWithTemplate" 
+            Grid.Row="0"
+            ItemsSource="{Binding Sheets}"
+            Orientation="Horizontal"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            ItemTemplate="{StaticResource PageDotIndicatorTemplate}"
+            />-->
+
+
+            <controls:CustomStackLayout
+                x:Name="PageDotIndicatorWithoutTemplate" 
+                Grid.Row="1"
+                ItemsSource="{Binding Sheets}"
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <controls:CustomStackLayout.ItemTemplate>
+                    <DataTemplate>
+                            <BoxView HeightRequest="10"
+                                     WidthRequest="10"
+                                     BackgroundColor="CornflowerBlue">
+                                <BoxView.Triggers>
+                                    <DataTrigger Binding="{Binding IsCurrent}"
+                                                 TargetType="BoxView"
+                                                 Value="True">
+                                        <Setter Property="BackgroundColor" Value="White" />
+                                    </DataTrigger>
+                                </BoxView.Triggers>
+                            </BoxView>
+                    </DataTemplate>
+                </controls:CustomStackLayout.ItemTemplate>
+            </controls:CustomStackLayout>
+
+        </Grid>
+    </controls:CustomContentView>
+   
+
+
+
+   
+</ContentPage>
